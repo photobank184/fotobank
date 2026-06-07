@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{% if form.instance.pk %}Редактировать{% else %}Новая публикация{% endif %}</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  
+  <h4 class="mt-4">Фотографии</h4>
+  <div id="photo-formset">
+    {{ formset.management_form }}
+    {% for f in formset %}
+    <div class="photo-form border p-2 mb-2 rounded bg-white">
+      {{ f.as_p }}
+    </div>
+    {% endfor %}
+    <div class="photo-form border p-2 mb-2 rounded bg-white form-template" style="display:none">
+      {{ formset.empty_form.as_p }}
+    </div>
+  </div>
+  <button type="button" id="add-photo-btn" class="btn btn-outline-secondary mb-3">+ Добавить фото</button>
+  <button type="submit" class="btn btn-primary btn-lg">💾 Сохранить</button>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const formset = document.getElementById('photo-formset');
+  const totalForms = document.getElementById('id_photos-TOTAL_FORMS');
+  const addBtn = document.getElementById('add-photo-btn');
+  let count = parseInt(totalForms.value);
+
+  addBtn.addEventListener('click', () => {
+    const tmpl = formset.querySelector('.form-template').cloneNode(true);
+    tmpl.innerHTML = tmpl.innerHTML.replace(/__prefix__/g, count);
+    tmpl.style.display = 'block';
+    formset.insertBefore(tmpl, formset.querySelector('.form-template'));
+    totalForms.value = ++count;
+  });
+
+  formset.addEventListener('change', e => {
+    if (e.target.name.includes('-DELETE') && e.target.checked) {
+      e.target.closest('.photo-form').style.display = 'none';
+    }
+  });
+});
+</script>
+{% endblock %}

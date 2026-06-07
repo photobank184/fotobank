@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center"><div class="col-md-6">
+  <div class="card mt-5 p-4">
+    <h3>Вход в систему</h3>
+    <form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn btn-primary w-100">Войти</button></form>
+    <p class="mt-3 text-muted small">Используйте существующий аккаунт Django или создайте через админку.</p>
+  </div>
+</div></div>
+{% endblock %}

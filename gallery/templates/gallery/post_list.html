@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+PhotoBank — премиальные фото
+{% endblock %}
+
+{% block content %}
+
+<header class="hero">
+  <header class="hero hero-premium">
+    <div class="hero-bg-glow"></div>
+  
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+  
+          <div class="hero-badge mb-4">
+            <i class="bi bi-stars"></i>
+            Профессиональный фотобанк
+          </div>
+  
+          <h1 class="hero-title mb-4">
+            Найдите идеальное фото для любого проекта
+          </h1>
+  
+          <p class="hero-text mb-5">
+            Премиальные изображения от авторов PhotoBank: для сайтов,
+            рекламы, брендов, презентаций и коммерческих задач.
+          </p>
+  
+          <form method="get"
+                action="{% url 'gallery:post_list' %}"
+                class="search-panel hero-search-panel">
+  
+            <div class="row g-2 align-items-center">
+  
+              <div class="col-lg-9">
+                <input type="search"
+                       name="q"
+                       value="{{ request.GET.q }}"
+                       class="form-control px-4"
+                       placeholder="Поиск фотографий, тем или авторов...">
+              </div>
+  
+              <div class="col-lg-3 d-grid">
+                <button class="btn btn-accent" type="submit">
+                  <i class="bi bi-search me-2"></i>
+                  Найти
+                </button>
+              </div>
+  
+            </div>
+          </form>
+  
+          <div class="hero-tags mt-4">
+            <span>Популярное:</span>
+            <a href="?q=природа">природа</a>
+            <a href="?q=бизнес">бизнес</a>
+            <a href="?q=еда">еда</a>
+            <a href="?q=люди">люди</a>
+          </div>
+  
+        </div>
+  
+        <div class="col-lg-4 d-none d-lg-block">
+          <div class="hero-visual-card">
+  
+            {% with posts.0.photos.first as cover %}
+              {% if cover %}
+                <img src="{{ cover.image.url }}" alt="Фото" class="hero-visual-img">
+              {% else %}
+                <div class="hero-visual-placeholder">
+                  <i class="bi bi-image"></i>
+                </div>
+              {% endif %}
+            {% endwith %}
+  
+            <div class="hero-visual-info">
+              <span>Featured photo</span>
+              <strong>Коллекция дня</strong>
+            </div>
+  
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </header>
+  
+
+</header>
+
+<main>
+
+  <section id="popular" class="section-padding bg-light">
+    <div class="container">
+
+      <div class="text-center mb-5">
+      
+
+        <h2 class="section-title">
+          Последние публикации
+        </h2>
+      </div>
+
+      <div class="row g-4">
+
+        {% for post in posts %}
+
+          <div class="col-md-6 col-lg-4">
+            <article class="card photo-card h-100">
+
+              <article class="photo-card-new h-100">
+
+                {% with post.photos.first as cover %}
+                  {% if cover %}
+                    <a href="{% url 'gallery:post_detail' post.pk %}" class="photo-card-image-link">
+                      <img src="{{ cover.image.url }}"
+                           class="photo-card-new-img"
+                           alt="{{ cover.title|default:post.title }}">
+                    </a>
+              
+                    <div class="photo-card-new-body">
+              
+                      <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
+                        <div>
+                          <h3 class="photo-card-title">
+                            {{ cover.title|default:post.title }}
+                          </h3>
+              
+                          <p class="photo-card-author">
+                            Автор: {{ post.author.username }}
+                          </p>
+                        </div>
+              
+                        {% if cover.is_free %}
+                          <span class="license-badge free">Free</span>
+                        {% else %}
+                          <span class="license-badge restricted">Rights</span>
+                        {% endif %}
+                      </div>
+              
+                      {% if cover.short_description %}
+                        <p class="photo-card-desc">
+                          {{ cover.short_description|truncatechars:90 }}
+                        </p>
+                      {% elif post.description %}
+                        <p class="photo-card-desc">
+                          {{ post.description|truncatechars:90 }}
+                        </p>
+                      {% endif %}
+              
+                      <div class="photo-meta-row">
+                        <span>{{ post.published_at|date:"d.m.Y" }}</span>
+                        <a href="{% url 'gallery:post_detail' post.pk %}"
+                           class="btn btn-sm btn-outline-dark rounded-pill px-3">
+                          Подробнее
+                        </a>
+                      </div>
+              
+                    </div>
+                  {% endif %}
+                {% endwith %}
+              
+              </article>
+            </article>
+          </div>
+
+        {% empty %}
+
+          <div class="col-12">
+            <div class="empty-state text-center">
+
+              <i class="bi bi-camera fs-1"></i>
+
+              <h3 class="h4 fw-bold mt-3">
+                Публикаций пока нет
+              </h3>
+
+              <p class="text-secondary">
+                Загрузите первые фотографии.
+              </p>
+
+              {% if request.user.is_authenticated %}
+                <a href="{% url 'gallery:post_create' %}"
+                   class="btn btn-accent px-4">
+                  Создать публикацию
+                </a>
+              {% else %}
+                <a href="{% url 'login' %}"
+                   class="btn btn-accent px-4">
+                  Войти как автор
+                </a>
+              {% endif %}
+
+            </div>
+          </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+  </section>
+
+  <section id="authors" class="section-padding">
+    <div class="container">
+
+      <div class="text-center mb-5">
+        <div class="section-kicker mb-2">
+          Авторы
+        </div>
+
+        <h2 class="section-title">
+          Популярные фотографы
+        </h2>
+
+        <p class="text-secondary mt-3">
+          Авторы, которые уже публикуют свои работы в фотобанке
+        </p>
+      </div>
+
+      <div class="row g-4">
+
+        {% for author in authors %}
+
+          <div class="col-md-6 col-lg-4">
+            <div class="pixabay-author-card">
+
+              {% if author.profile.cover %}
+                <div class="author-cover"
+                     style="background-image: linear-gradient(135deg, rgba(15,23,42,.25), rgba(15,23,42,.2)), url('{{ author.profile.cover.url }}');">
+                </div>
+              {% else %}
+                <div class="author-cover"></div>
+              {% endif %}
+
+              <div class="pixabay-author-body">
+
+                {% if author.profile.avatar %}
+                  <img src="{{ author.profile.avatar.url }}"
+                       class="pixabay-avatar-img"
+                       alt="{{ author.username }}">
+                {% else %}
+                  <div class="pixabay-avatar">
+                    {{ author.username|slice:":1"|upper }}
+                  </div>
+                {% endif %}
+
+                <h3 class="h4 fw-bold mt-3 mb-1">
+                  {{ author.username }}
+                </h3>
+
+                {% if author.profile.location %}
+                  <p class="text-secondary small mb-2">
+                    <i class="bi bi-geo-alt"></i>
+                    {{ author.profile.location }}
+                  </p>
+                {% endif %}
+
+                <p class="text-secondary small mb-3 author-bio">
+                  {{ author.profile.bio|default:"Фотограф PhotoBank"|truncatechars:90 }}
+                </p>
+
+                <a href="#"
+                   class="btn btn-dark rounded-pill px-4 mb-4">
+                  Смотреть работы
+                </a>
+
+                <div class="author-stats-grid">
+
+                  <div>
+                    <strong>{{ author.posts_count }}</strong>
+                    <span>Публикаций</span>
+                  </div>
+
+                  <div>
+                    <strong>{{ author.profile.followers_count }}</strong>
+                    <span>Подписчики</span>
+                  </div>
+
+                  <div>
+                    <strong>{{ author.profile.likes_count }}</strong>
+                    <span>Лайки</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        {% empty %}
+
+          <div class="col-12">
+            <div class="empty-state text-center">
+
+              <i class="bi bi-people fs-1"></i>
+
+              <h3 class="h4 fw-bold mt-3">
+                Авторов пока нет
+              </h3>
+
+              <p class="text-secondary">
+                Как только появятся публикации, авторы будут показаны здесь.
+              </p>
+
+            </div>
+          </div>
+
+        {% endfor %}
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+{% endblock %}

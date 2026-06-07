@@ -1,0 +1,224 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ post.title }} — PhotoBank
+{% endblock %}
+
+{% block content %}
+
+<main class="photo-detail-page">
+
+  <div class="container">
+
+    <a href="{% url 'gallery:post_list' %}" class="back-link">
+      ← Назад в галерею
+    </a>
+
+    <div class="photo-detail-header">
+      <div>
+        <h1>{{ post.title }}</h1>
+        <p>
+          Автор: <strong>{{ post.author.username }}</strong>
+          · {{ post.published_at|date:"d.m.Y" }}
+        </p>
+      </div>
+    </div>
+
+    {% if post.description %}
+      <p class="photo-detail-post-desc">
+        {{ post.description }}
+      </p>
+    {% endif %}
+
+    {% for photo in post.photos.all %}
+
+      <section class="photo-detail-card">
+
+        <div class="photo-detail-image-wrap">
+          <img src="{{ photo.image.url }}"
+               alt="{{ photo.title|default:post.title }}"
+               class="photo-detail-img">
+        </div>
+
+        <div class="photo-detail-info">
+
+          <div class="photo-detail-main-info">
+
+            <h2>
+              {{ photo.title|default:post.title }}
+            </h2>
+
+            {% if photo.short_description %}
+              <p class="photo-short-description">
+                {{ photo.short_description }}
+              </p>
+            {% endif %}
+
+            {% if photo.is_free %}
+              <div class="license-box license-free">
+                <h3>Фото можно использовать бесплатно</h3>
+                <p>
+                  Автор разрешил использовать это изображение бесплатно в любых целях, без указания имени автора и ссылки на страницу заимствования.
+                </p>
+
+                <a href="{{ photo.image.url }}"
+                   download
+                   class="btn btn-success btn-lg rounded-pill px-5">
+                  Скачать оригинал
+                </a>
+              </div>
+            {% else %}
+              <div class="license-box license-restricted">
+                <h3>Автор ограничил права использования</h3>
+                <p>
+                  Это фото не распространяется бесплатно. Для покупки, лицензии или согласования условий свяжитесь с автором.
+                </p>
+
+                {% if photo.price_note %}
+                  <p class="price-note">
+                    {{ photo.price_note }}
+                  </p>
+                {% endif %}
+
+                <button class="btn btn-dark btn-lg rounded-pill px-5"
+                        data-bs-toggle="modal"
+                        data-bs-target="#contactModal{{ photo.id }}">
+                  Связаться с автором
+                </button>
+              </div>
+            {% endif %}
+
+          </div>
+
+          <div class="photo-tech-card">
+
+            <h3>Информация о фото</h3>
+
+            <div class="tech-row">
+              <span>Фотоаппарат</span>
+              <strong>{{ photo.camera_model|default:"Не указано" }}</strong>
+            </div>
+
+            <div class="tech-row">
+              <span>Формат</span>
+              <strong>{{ photo.file_format|default:"JPG" }}</strong>
+            </div>
+
+            <div class="tech-row">
+              <span>Разрешение</span>
+              <strong>{{ photo.resolution|default:"Не указано" }}</strong>
+            </div>
+
+            <div class="tech-row">
+              <span>Дата публикации</span>
+              <strong>{{ photo.created_at|date:"d E Y г." }}</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <div class="modal fade" id="contactModal{{ photo.id }}" tabindex="-1">
+        <div class="modal-dialog">
+          <form method="post"
+                action="{% url 'gallery:contact_author' post.id photo.id %}"
+                class="modal-content">
+            {% csrf_token %}
+
+            <div class="modal-header">
+              <h5 class="modal-title">
+                Связаться с автором
+              </h5>
+            </div>
+
+            <div class="modal-body">
+              {% for field in contact_form %}
+                <div class="mb-3">
+                  {{ field.label_tag }}
+                  {{ field }}
+                </div>
+              {% endfor %}
+            </div>
+
+            <div class="modal-footer">
+              <button type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal">
+                Закрыть
+              </button>
+
+              <button type="submit"
+                      class="btn btn-dark">
+                Отправить запрос
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    {% endfor %}
+
+  </div>
+  {% if related_posts %}
+<section class="related-section">
+  <div class="container">
+
+    <div class="related-header">
+      <div>
+        <div class="section-kicker mb-2">Похожие фото</div>
+        <h2 class="related-title">Ещё из этой категории</h2>
+      </div>
+    </div>
+
+    <div class="row g-4">
+
+      {% for related in related_posts %}
+
+      <div class="col-md-6 col-lg-4">
+        <article class="related-card">
+
+          {% with related.photos.first as cover %}
+            {% if cover %}
+              <a href="{% url 'gallery:post_detail' related.pk %}">
+                <img src="{{ cover.image.url }}"
+                     alt="{{ cover.title|default:related.title }}"
+                     class="related-card-img">
+              </a>
+            {% endif %}
+          {% endwith %}
+
+          <div class="related-card-body">
+            <div class="related-categories">
+              {% for category in related.categories.all|slice:":3" %}
+                <span>{{ category.name }}</span>
+              {% endfor %}
+            </div>
+
+            <h3>{{ related.title }}</h3>
+
+            <p>
+              Автор: {{ related.author.username }}
+            </p>
+
+            <a href="{% url 'gallery:post_detail' related.pk %}"
+               class="btn btn-sm btn-outline-light rounded-pill px-3">
+              Смотреть
+            </a>
+          </div>
+
+        </article>
+      </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+{% endif %}
+</main>
+
+{% endblock %}

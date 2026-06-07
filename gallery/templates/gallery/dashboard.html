@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>📊 Мой кабинет</h2>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead><tr><th>Название</th><th>Фото</th><th>Статус</th><th>Дата</th><th>Действия</th></tr></thead>
+    <tbody>
+      {% for p in posts %}
+      <tr>
+        <td>{{ p.title }}</td>
+        <td>{{ p.photos.count }}</td>
+        <td>{% if p.is_published %}<span class="badge bg-success">Опубликовано</span>{% else %}<span class="badge bg-secondary">Черновик</span>{% endif %}</td>
+        <td>{{ p.created_at|date:"d.m.Y" }}</td>
+        <td>
+          <a href="{% url 'gallery:post_edit' p.pk %}" class="btn btn-sm btn-outline-primary">Изменить</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5" class="text-center">У вас нет публикаций</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<a href="{% url 'gallery:post_create' %}" class="btn btn-primary">➕ Создать новый пост</a>
+{% endblock %}
