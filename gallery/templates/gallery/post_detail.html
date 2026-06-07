@@ -182,7 +182,7 @@
 
           {% with related.photos.first as cover %}
             {% if cover %}
-              <a href="{% url 'gallery:post_detail' related.pk %}">
+              <a href="{% url 'gallery:post_detail' related.slug %}">
                 <img src="{{ cover.image.url }}"
                      alt="{{ cover.title|default:related.title }}"
                      class="related-card-img">
@@ -203,7 +203,7 @@
               Автор: {{ related.author.username }}
             </p>
 
-            <a href="{% url 'gallery:post_detail' related.pk %}"
+            <a href="{% url 'gallery:post_detail' related.slug%}"
                class="btn btn-sm btn-outline-light rounded-pill px-3">
               Смотреть
             </a>

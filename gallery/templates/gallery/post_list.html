@@ -115,7 +115,7 @@ PhotoBank — премиальные фото
 
                 {% with post.photos.first as cover %}
                   {% if cover %}
-                    <a href="{% url 'gallery:post_detail' post.pk %}" class="photo-card-image-link">
+                    <a href="{% url 'gallery:post_detail' post.slug %}" class="photo-card-image-link">
                       <img src="{{ cover.image.url }}"
                            class="photo-card-new-img"
                            alt="{{ cover.title|default:post.title }}">
@@ -153,7 +153,7 @@ PhotoBank — премиальные фото
               
                       <div class="photo-meta-row">
                         <span>{{ post.published_at|date:"d.m.Y" }}</span>
-                        <a href="{% url 'gallery:post_detail' post.pk %}"
+                        <a href="{% url 'gallery:post_detail' post.slug %}"
                            class="btn btn-sm btn-outline-dark rounded-pill px-3">
                           Подробнее
                         </a>
@@ -262,9 +262,9 @@ PhotoBank — премиальные фото
                   {{ author.profile.bio|default:"Фотограф PhotoBank"|truncatechars:90 }}
                 </p>
 
-                <a href="#"
-                   class="btn btn-dark rounded-pill px-4 mb-4">
-                  Смотреть работы
+                <a href="{% url 'gallery:author_posts' author.username %}"
+                class="btn btn-dark rounded-pill px-4 mb-4">
+                    Смотреть работы
                 </a>
 
                 <div class="author-stats-grid">

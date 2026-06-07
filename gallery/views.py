@@ -20,9 +20,7 @@ class PostListView(ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        queryset = Post.objects.filter(
-            is_published=True
-        ).select_related(
+        queryset = Post.objects.filter(is_published=True).select_related(
             'author',
             'author__profile'
         ).prefetch_related(
@@ -55,8 +53,8 @@ class PostListView(ListView):
         ).order_by('-posts_count')[:6]
 
         context['authors'] = authors
-
         return context
+
 
 class AuthorPostsView(ListView):
     model = Post
@@ -64,10 +62,7 @@ class AuthorPostsView(ListView):
     context_object_name = 'posts'
 
     def get_queryset(self):
-        self.author = get_object_or_404(
-            User,
-            username=self.kwargs['username']
-        )
+        self.author = get_object_or_404(User, username=self.kwargs['username'])
 
         return Post.objects.filter(
             author=self.author,
@@ -85,17 +80,21 @@ class AuthorPostsView(ListView):
         context['author'] = self.author
         return context
 
+
 class PostDetailView(DetailView):
     model = Post
     template_name = 'gallery/post_detail.html'
     context_object_name = 'post'
+    slug_field = 'slug'
+    slug_url_kwarg = 'slug'
 
     def get_queryset(self):
         return Post.objects.select_related(
             'author',
             'author__profile'
         ).prefetch_related(
-            'photos'
+            'photos',
+            'categories'
         )
 
     def get_context_data(self, **kwargs):
@@ -192,6 +191,8 @@ def dashboard(request):
 
 
 def contact_author(request, post_id, photo_id):
+    post = get_object_or_404(Post, id=post_id)
+
     if request.method == 'POST':
         form = ContactForm(request.POST)
 
@@ -212,8 +213,8 @@ def contact_author(request, post_id, photo_id):
             )
 
             messages.success(request, '✅ Запрос успешно отправлен автору!')
-            return redirect('gallery:post_detail', pk=post_id)
+            return redirect('gallery:post_detail', slug=photo.post.slug)
 
         messages.error(request, '❌ Ошибка отправки или обнаружен спам.')
 
-    return redirect('gallery:post_detail', pk=post_id)
+    return redirect('gallery:post_detail', slug=post.slug)

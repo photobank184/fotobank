@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Работы автора {{ author.username }}
+{% endblock %}
+
+{% block content %}
+
+<main class="section-padding bg-light" style="padding-top: 140px;">
+  <div class="container">
+
+    <div class="text-center mb-5">
+      <div class="section-kicker mb-2">Автор</div>
+      <h1 class="section-title">{{ author.username }}</h1>
+
+      {% if author.profile.bio %}
+        <p class="text-secondary mt-3">
+          {{ author.profile.bio }}
+        </p>
+      {% endif %}
+    </div>
+
+    <div class="row g-4">
+
+      {% for post in posts %}
+
+      <div class="col-md-6 col-lg-4">
+        <article class="photo-card-new h-100">
+
+          {% with post.photos.first as cover %}
+            {% if cover %}
+              <a href="{% url 'gallery:post_detail' post.slug %}">
+                <img src="{{ cover.image.url }}"
+                     class="photo-card-new-img"
+                     alt="{{ cover.title|default:post.title }}">
+              </a>
+            {% endif %}
+          {% endwith %}
+
+          <div class="photo-card-new-body">
+            <h3 class="photo-card-title">
+              {{ post.title }}
+            </h3>
+
+            <p class="photo-card-author">
+              {{ post.published_at|date:"d.m.Y" }}
+            </p>
+
+            <a href="{% url 'gallery:post_detail' post.slug %}"
+               class="btn btn-sm btn-outline-dark rounded-pill px-3 mt-3">
+              Открыть
+            </a>
+          </div>
+
+        </article>
+      </div>
+
+      {% empty %}
+
+      <div class="col-12">
+        <div class="empty-state text-center">
+          <h3>У автора пока нет опубликованных работ</h3>
+        </div>
+      </div>
+
+      {% endfor %}
+
+    </div>
+  </div>
+</main>
+
+{% endblock %}
