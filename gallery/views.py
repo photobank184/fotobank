@@ -6,9 +6,9 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.urls import reverse_lazy
-from django.db.models import Count, Q
+from django.db.models import Count, Q, Prefetch
 
-from .models import Post, Photo
+from .models import Post, Photo, Category
 from .forms import PostForm, PhotoFormSet, ContactForm
 
 User = get_user_model()
@@ -18,6 +18,7 @@ class PostListView(ListView):
     model = Post
     template_name = 'gallery/post_list.html'
     context_object_name = 'posts'
+    paginate_by = 15
 
     def get_queryset(self):
         queryset = Post.objects.filter(is_published=True).select_related(
@@ -34,7 +35,8 @@ class PostListView(ListView):
             queryset = queryset.filter(
                 Q(title__icontains=query) |
                 Q(description__icontains=query) |
-                Q(author__username__icontains=query)
+                Q(author__username__icontains=query) |
+                Q(categories__name__icontains=query)
             )
 
         return queryset.distinct().order_by('-published_at', '-created_at')
@@ -52,7 +54,37 @@ class PostListView(ListView):
             posts_count__gt=0
         ).order_by('-posts_count')[:6]
 
+        published_posts_for_categories = Post.objects.filter(
+            is_published=True
+        ).prefetch_related(
+            'photos'
+        ).order_by(
+            '-published_at',
+            '-created_at'
+        )
+
+        categories = Category.objects.annotate(
+            posts_count=Count(
+                'posts',
+                filter=Q(posts__is_published=True)
+            )
+        ).filter(
+            posts_count__gt=0
+        ).prefetch_related(
+            Prefetch(
+                'posts',
+                queryset=published_posts_for_categories,
+                to_attr='preview_posts'
+            )
+        ).order_by(
+            '-posts_count',
+            'name'
+        )[:8]
+
         context['authors'] = authors
+        context['categories'] = categories
+        context['current_query'] = self.request.GET.get('q', '')
+
         return context
 
 
@@ -218,3 +250,21 @@ def contact_author(request, post_id, photo_id):
         messages.error(request, '❌ Ошибка отправки или обнаружен спам.')
 
     return redirect('gallery:post_detail', slug=post.slug)
+
+
+class AuthorsListView(ListView):
+    model = User
+    template_name = 'gallery/authors_list.html'
+    context_object_name = 'authors'
+    paginate_by = 12
+
+    def get_queryset(self):
+        return User.objects.filter(
+            posts__is_published=True
+        ).select_related(
+            'profile'
+        ).annotate(
+            posts_count=Count('posts', filter=Q(posts__is_published=True))
+        ).filter(
+            posts_count__gt=0
+        ).order_by('-posts_count', 'username')

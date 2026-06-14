@@ -7,88 +7,75 @@ PhotoBank — премиальные фото
 
 {% block content %}
 
-<header class="hero">
-  <header class="hero hero-premium">
-    <div class="hero-bg-glow"></div>
-  
-    <div class="container hero-content">
-      <div class="row align-items-center">
-        <div class="col-lg-8">
-  
-          <div class="hero-badge mb-4">
-            <i class="bi bi-stars"></i>
-            Профессиональный фотобанк
-          </div>
-  
-          <h1 class="hero-title mb-4">
-            Найдите идеальное фото для любого проекта
-          </h1>
-  
-          <p class="hero-text mb-5">
-            Премиальные изображения от авторов PhotoBank: для сайтов,
-            рекламы, брендов, презентаций и коммерческих задач.
-          </p>
-  
-          <form method="get"
-                action="{% url 'gallery:post_list' %}"
-                class="search-panel hero-search-panel">
-  
-            <div class="row g-2 align-items-center">
-  
-              <div class="col-lg-9">
-                <input type="search"
-                       name="q"
-                       value="{{ request.GET.q }}"
-                       class="form-control px-4"
-                       placeholder="Поиск фотографий, тем или авторов...">
-              </div>
-  
-              <div class="col-lg-3 d-grid">
-                <button class="btn btn-accent" type="submit">
-                  <i class="bi bi-search me-2"></i>
-                  Найти
-                </button>
-              </div>
-  
-            </div>
-          </form>
-  
-          <div class="hero-tags mt-4">
-            <span>Популярное:</span>
-            <a href="?q=природа">природа</a>
-            <a href="?q=бизнес">бизнес</a>
-            <a href="?q=еда">еда</a>
-            <a href="?q=люди">люди</a>
-          </div>
-  
+<header class="hero hero-premium hero-redesign">
+  <div class="hero-bg-glow"></div>
+
+  <div class="container hero-content">
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-6">
+
+        <div class="hero-badge mb-4">
+          <i class="bi bi-stars"></i>
+          Профессиональный фотобанк
         </div>
-  
-        <div class="col-lg-4 d-none d-lg-block">
-          <div class="hero-visual-card">
-  
-            {% with posts.0.photos.first as cover %}
+
+        <h1 class="hero-title mb-4">
+          Премиальные фото для сайтов, рекламы и брендов
+        </h1>
+
+        <p class="hero-text mb-5">
+          Находите качественные изображения от авторов PhotoBank:
+          для коммерческих проектов, презентаций, карточек товаров и контента.
+        </p>
+
+        <form method="get"
+              action="{% url 'gallery:post_list' %}"
+              class="search-panel hero-search-panel">
+
+          <input type="search"
+                 name="q"
+                 value="{{ request.GET.q }}"
+                 class="form-control"
+                 placeholder="Поиск: природа, косметика, портрет, еда...">
+
+          <button class="btn btn-accent" type="submit">
+            <i class="bi bi-search me-2"></i>
+            Найти
+          </button>
+
+        </form>
+
+        <div class="hero-tags mt-4">
+          <span>Популярное:</span>
+          <a href="?q=природа">природа</a>
+          <a href="?q=красота">красота</a>
+          <a href="?q=косметика">косметика</a>
+          <a href="?q=человек">человек</a>
+        </div>
+
+      </div>
+
+      <div class="col-lg-6 d-none d-lg-block">
+        <div class="hero-collage">
+
+          {% for post in posts|slice:":5" %}
+            {% with post.photos.first as cover %}
               {% if cover %}
-                <img src="{{ cover.image.url }}" alt="Фото" class="hero-visual-img">
-              {% else %}
-                <div class="hero-visual-placeholder">
-                  <i class="bi bi-image"></i>
-                </div>
+                <a href="{% url 'gallery:post_detail' post.slug %}"
+                   class="hero-collage-item item-{{ forloop.counter }}">
+                  <img src="{{ cover.image.url }}"
+                       alt="{{ cover.title|default:post.title }}">
+                </a>
               {% endif %}
             {% endwith %}
-  
-            <div class="hero-visual-info">
-              <span>Featured photo</span>
-              <strong>Коллекция дня</strong>
-            </div>
-  
-          </div>
-        </div>
-  
-      </div>
-    </div>
-  </header>
-  
+          {% endfor %}
 
+        </div>
+      </div>
+
+    </div>
+  </div>
 </header>
 
 <main>
@@ -97,11 +84,13 @@ PhotoBank — премиальные фото
     <div class="container">
 
       <div class="text-center mb-5">
-      
-
         <h2 class="section-title">
           Последние публикации
         </h2>
+
+        <p class="text-secondary mt-3">
+          На главной показываем первые 15 работ. Остальные доступны через кнопку «Показать ещё».
+        </p>
       </div>
 
       <div class="row g-4">
@@ -109,61 +98,67 @@ PhotoBank — премиальные фото
         {% for post in posts %}
 
           <div class="col-md-6 col-lg-4">
-            <article class="card photo-card h-100">
+            <article class="photo-card-new h-100">
 
-              <article class="photo-card-new h-100">
+              {% with post.photos.first as cover %}
+  {% if cover %}
+    <a href="{% url 'gallery:post_detail' post.slug %}" class="photo-card-image-link">
 
-                {% with post.photos.first as cover %}
-                  {% if cover %}
-                    <a href="{% url 'gallery:post_detail' post.slug %}" class="photo-card-image-link">
-                      <img src="{{ cover.image.url }}"
-                           class="photo-card-new-img"
-                           alt="{{ cover.title|default:post.title }}">
-                    </a>
-              
-                    <div class="photo-card-new-body">
-              
-                      <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
-                        <div>
-                          <h3 class="photo-card-title">
-                            {{ cover.title|default:post.title }}
-                          </h3>
-              
-                          <p class="photo-card-author">
-                            Автор: {{ post.author.username }}
-                          </p>
-                        </div>
-              
-                        {% if cover.is_free %}
-                          <span class="license-badge free">Free</span>
-                        {% else %}
-                          <span class="license-badge restricted">Rights</span>
-                        {% endif %}
+      {% if cover.watermarked_image %}
+        <img src="{{ cover.watermarked_image.url }}"
+             class="photo-card-new-img"
+             alt="{{ cover.title|default:post.title }}">
+      {% else %}
+        <img src="{{ cover.image.url }}"
+             class="photo-card-new-img"
+             alt="{{ cover.title|default:post.title }}">
+      {% endif %}
+
+    </a>
+
+                  <div class="photo-card-new-body">
+
+                    <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
+                      <div>
+                        <h3 class="photo-card-title">
+                          {{ cover.title|default:post.title }}
+                        </h3>
+
+                        <p class="photo-card-author">
+                          Автор: {{ post.author.username }}
+                        </p>
                       </div>
-              
-                      {% if cover.short_description %}
-                        <p class="photo-card-desc">
-                          {{ cover.short_description|truncatechars:90 }}
-                        </p>
-                      {% elif post.description %}
-                        <p class="photo-card-desc">
-                          {{ post.description|truncatechars:90 }}
-                        </p>
+
+                      {% if cover.is_free %}
+                        <span class="license-badge free">Free</span>
+                      {% else %}
+                        <span class="license-badge restricted">Rights</span>
                       {% endif %}
-              
-                      <div class="photo-meta-row">
-                        <span>{{ post.published_at|date:"d.m.Y" }}</span>
-                        <a href="{% url 'gallery:post_detail' post.slug %}"
-                           class="btn btn-sm btn-outline-dark rounded-pill px-3">
-                          Подробнее
-                        </a>
-                      </div>
-              
                     </div>
-                  {% endif %}
-                {% endwith %}
-              
-              </article>
+
+                    {% if cover.short_description %}
+                      <p class="photo-card-desc">
+                        {{ cover.short_description|truncatechars:90 }}
+                      </p>
+                    {% elif post.description %}
+                      <p class="photo-card-desc">
+                        {{ post.description|truncatechars:90 }}
+                      </p>
+                    {% endif %}
+
+                    <div class="photo-meta-row">
+                      <span>{{ post.published_at|date:"d.m.Y" }}</span>
+
+                      <a href="{% url 'gallery:post_detail' post.slug %}"
+                         class="btn btn-sm btn-outline-dark rounded-pill px-3">
+                        Подробнее
+                      </a>
+                    </div>
+
+                  </div>
+                {% endif %}
+              {% endwith %}
+
             </article>
           </div>
 
@@ -200,8 +195,75 @@ PhotoBank — премиальные фото
         {% endfor %}
 
       </div>
+
+      {% if is_paginated and page_obj.has_next %}
+        <div class="text-center mt-5">
+          {% if current_query %}
+            <a href="?q={{ current_query }}&page={{ page_obj.next_page_number }}"
+               class="btn btn-dark rounded-pill px-5 py-3">
+              Показать ещё
+            </a>
+          {% else %}
+            <a href="?page={{ page_obj.next_page_number }}"
+               class="btn btn-dark rounded-pill px-5 py-3">
+              Показать ещё
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
     </div>
   </section>
+
+ <section id="categories" class="section-padding categories-premium">
+  <div class="container">
+
+    <div class="categories-head">
+      <div>
+        <div class="section-kicker mb-2">Категории</div>
+        <h2 class="section-title">Популярные направления</h2>
+        <p class="text-secondary mt-3">
+          Выбирайте темы по готовым коллекциям фотографий
+        </p>
+      </div>
+    </div>
+
+    <div class="categories-grid">
+
+      {% for category in categories %}
+        <a href="?q={{ category.name }}"
+           class="category-premium-card {% if forloop.first %}category-large{% endif %}">
+
+          {% with category.preview_posts.0 as category_post %}
+            {% if category_post %}
+              {% with category_post.photos.first as category_photo %}
+                {% if category_photo %}
+                  <img src="{{ category_photo.image.url }}"
+                       alt="{{ category.name }}">
+                {% endif %}
+              {% endwith %}
+            {% endif %}
+          {% endwith %}
+
+          <div class="category-overlay"></div>
+
+          <div class="category-content">
+            <span class="category-count">{{ category.posts_count }} фото</span>
+            <h3>{{ category.name }}</h3>
+          </div>
+
+        </a>
+      {% empty %}
+        <div class="empty-state text-center">
+          Категории появятся после добавления публикаций.
+        </div>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+  
 
   <section id="authors" class="section-padding">
     <div class="container">
@@ -263,8 +325,8 @@ PhotoBank — премиальные фото
                 </p>
 
                 <a href="{% url 'gallery:author_posts' author.username %}"
-                class="btn btn-dark rounded-pill px-4 mb-4">
-                    Смотреть работы
+                   class="btn btn-dark rounded-pill px-4 mb-4">
+                  Смотреть работы
                 </a>
 
                 <div class="author-stats-grid">

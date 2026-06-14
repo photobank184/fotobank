@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Наши авторы — PhotoBank
+{% endblock %}
+
+{% block content %}
+
+<main class="authors-page">
+
+  <section class="authors-hero">
+    <div class="container text-center">
+      <div class="section-kicker mb-2">
+        Авторы
+      </div>
+
+      <h1 class="section-title">
+        Наши авторы
+      </h1>
+
+      <p class="text-secondary mt-3">
+        Фотографы, которые публикуют свои работы в PhotoBank
+      </p>
+    </div>
+  </section>
+
+  <section class="section-padding bg-light">
+    <div class="container">
+
+      <div class="row g-4">
+
+        {% for author in authors %}
+
+          <div class="col-md-6 col-lg-4">
+            <div class="pixabay-author-card">
+
+              {% if author.profile.cover %}
+                <div class="author-cover"
+                     style="background-image: linear-gradient(135deg, rgba(15,23,42,.25), rgba(15,23,42,.2)), url('{{ author.profile.cover.url }}');">
+                </div>
+              {% else %}
+                <div class="author-cover"></div>
+              {% endif %}
+
+              <div class="pixabay-author-body">
+
+                {% if author.profile.avatar %}
+                  <img src="{{ author.profile.avatar.url }}"
+                       class="pixabay-avatar-img"
+                       alt="{{ author.username }}">
+                {% else %}
+                  <div class="pixabay-avatar">
+                    {{ author.username|slice:":1"|upper }}
+                  </div>
+                {% endif %}
+
+                <h3 class="h4 fw-bold mt-3 mb-1">
+                  {{ author.username }}
+                </h3>
+
+                {% if author.profile.location %}
+                  <p class="text-secondary small mb-2">
+                    <i class="bi bi-geo-alt"></i>
+                    {{ author.profile.location }}
+                  </p>
+                {% endif %}
+
+                <p class="text-secondary small mb-3 author-bio">
+                  {{ author.profile.bio|default:"Фотограф PhotoBank"|truncatechars:100 }}
+                </p>
+
+                <a href="{% url 'gallery:author_posts' author.username %}"
+                   class="btn btn-dark rounded-pill px-4 mb-4">
+                  Смотреть работы
+                </a>
+
+                <div class="author-stats-grid">
+
+                  <div>
+                    <strong>{{ author.posts_count }}</strong>
+                    <span>Публикаций</span>
+                  </div>
+
+                  <div>
+                    <strong>{{ author.profile.followers_count }}</strong>
+                    <span>Подписчики</span>
+                  </div>
+
+                  <div>
+                    <strong>{{ author.profile.likes_count }}</strong>
+                    <span>Лайки</span>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        {% empty %}
+
+          <div class="col-12">
+            <div class="empty-state text-center">
+              <i class="bi bi-people fs-1"></i>
+
+              <h3 class="h4 fw-bold mt-3">
+                Авторов пока нет
+              </h3>
+
+              <p class="text-secondary">
+                Авторы появятся после публикации первых работ.
+              </p>
+            </div>
+          </div>
+
+        {% endfor %}
+
+      </div>
+
+      {% if is_paginated %}
+        <div class="text-center mt-5">
+          {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"
+               class="btn btn-outline-dark rounded-pill px-4">
+              ← Назад
+            </a>
+          {% endif %}
+
+          <span class="mx-3 text-secondary">
+            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+          </span>
+
+          {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"
+               class="btn btn-dark rounded-pill px-4">
+              Далее →
+            </a>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    </div>
+  </section>
+
+</main>
+
+{% endblock %}

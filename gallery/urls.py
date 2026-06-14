@@ -12,5 +12,6 @@ urlpatterns = [
     path('edit/<int:pk>/', views.PostUpdateView.as_view(), name='post_edit'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('contact/<int:post_id>/<int:photo_id>/', views.contact_author, name='contact_author'),
+    path('authors/', views.AuthorsListView.as_view(), name='authors_list'),
     path('author/<str:username>/', views.AuthorPostsView.as_view(), name='author_posts'),
 ]
