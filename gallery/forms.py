@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import inlineformset_factory
 from .models import Post, Photo
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class PostForm(forms.ModelForm):
@@ -69,4 +70,29 @@ class ContactForm(forms.Form):
     phone = forms.CharField(
         required=False,
         widget=forms.HiddenInput()
+    )
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        label="Username",
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control form-control-lg",
+                "placeholder": "Username",
+                "autocomplete": "username",
+                "autofocus": True,
+            }
+        ),
+    )
+
+    password = forms.CharField(
+        label="Password",
+        strip=False,
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control form-control-lg",
+                "placeholder": "Password",
+                "autocomplete": "current-password",
+            }
+        ),
     )

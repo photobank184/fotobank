@@ -1235,3 +1235,53 @@ body.lightbox-open {
     radial-gradient(circle at 80% 10%, rgba(14,165,233,.16), transparent 30%),
     #f8fafc;
 }
+
+
+.legal-document {
+  color: #252525;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.legal-document h2 {
+  margin-top: 3.5rem;
+  margin-bottom: 1.25rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  scroll-margin-top: 110px;
+}
+
+.legal-document h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.legal-document p {
+  margin-bottom: 1.25rem;
+}
+
+.legal-document ul,
+.legal-document ol {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.legal-document li {
+  margin-bottom: 0.65rem;
+}
+
+.legal-document address {
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 1rem;
+  font-style: normal;
+}
+
+.legal-document .lead {
+  font-size: 1.2rem;
+  line-height: 1.7;
+}

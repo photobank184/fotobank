@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Legal Center | PhotoBank{% endblock %}
+
+{% block content %}
+<main class="container py-5 mt-5">
+  <div class="py-5">
+    <p class="text-uppercase fw-semibold text-secondary mb-2">
+      PhotoBank policies
+    </p>
+
+    <h1 class="display-4 fw-bold mb-3">
+      Legal Center
+    </h1>
+
+    <p class="lead text-secondary mb-5">
+      Review the agreements, policies and licensing terms governing the
+      use of the PhotoBank platform.
+    </p>
+
+    <div class="row g-4">
+
+      <div class="col-md-6">
+        <a href="{% url 'legal:terms' %}"
+           class="card h-100 text-decoration-none shadow-sm border-0">
+          <div class="card-body p-4">
+            <h2 class="h5 text-dark">Terms of Service</h2>
+            <p class="text-secondary mb-0">
+              General terms governing access to and use of PhotoBank.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6">
+        <a href="{% url 'legal:privacy' %}"
+           class="card h-100 text-decoration-none shadow-sm border-0">
+          <div class="card-body p-4">
+            <h2 class="h5 text-dark">Privacy Policy</h2>
+            <p class="text-secondary mb-0">
+              How personal information is collected, used and protected.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6">
+        <a href="{% url 'legal:cookies' %}"
+           class="card h-100 text-decoration-none shadow-sm border-0">
+          <div class="card-body p-4">
+            <h2 class="h5 text-dark">Cookie Policy</h2>
+            <p class="text-secondary mb-0">
+              Information about cookies and similar technologies.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6">
+        <a href="{% url 'legal:contributor_agreement' %}"
+           class="card h-100 text-decoration-none shadow-sm border-0">
+          <div class="card-body p-4">
+            <h2 class="h5 text-dark">Contributor Agreement</h2>
+            <p class="text-secondary mb-0">
+              Terms applying to photographers and content contributors.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6">
+        <a href="{% url 'legal:license_agreement' %}"
+           class="card h-100 text-decoration-none shadow-sm border-0">
+          <div class="card-body p-4">
+            <h2 class="h5 text-dark">Content License Agreement</h2>
+            <p class="text-secondary mb-0">
+              Permitted and prohibited uses of licensed content.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6">
+        <a href="{% url 'legal:copyright' %}"
+           class="card h-100 text-decoration-none shadow-sm border-0">
+          <div class="card-body p-4">
+            <h2 class="h5 text-dark">Copyright Policy</h2>
+            <p class="text-secondary mb-0">
+              Copyright complaints, takedown requests and rights protection.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6">
+        <a href="{% url 'legal:acceptable_use' %}"
+           class="card h-100 text-decoration-none shadow-sm border-0">
+          <div class="card-body p-4">
+            <h2 class="h5 text-dark">Acceptable Use Policy</h2>
+            <p class="text-secondary mb-0">
+              Rules governing responsible use of the platform.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6">
+        <a href="{% url 'legal:ai_content' %}"
+           class="card h-100 text-decoration-none shadow-sm border-0">
+          <div class="card-body p-4">
+            <h2 class="h5 text-dark">AI Content Policy</h2>
+            <p class="text-secondary mb-0">
+              Requirements for AI-generated and AI-assisted content.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6">
+        <a href="{% url 'legal:refunds' %}"
+           class="card h-100 text-decoration-none shadow-sm border-0">
+          <div class="card-body p-4">
+            <h2 class="h5 text-dark">Refund Policy</h2>
+            <p class="text-secondary mb-0">
+              Refund eligibility and procedures for purchases.
+            </p>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</main>
+{% endblock %}
