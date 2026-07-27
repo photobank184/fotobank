@@ -4,6 +4,6 @@ from .forms import LoginForm
 
 
 class PhotoBankLoginView(LoginView):
-    template_name = "login.html"
+    template_name = "gallery/login.html"
     authentication_form = LoginForm
     redirect_authenticated_user = True
