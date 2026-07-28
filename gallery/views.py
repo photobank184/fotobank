@@ -259,12 +259,21 @@ class AuthorsListView(ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        return User.objects.filter(
-            posts__is_published=True
-        ).select_related(
-            'profile'
-        ).annotate(
-            posts_count=Count('posts', filter=Q(posts__is_published=True))
-        ).filter(
-            posts_count__gt=0
-        ).order_by('-posts_count', 'username')
+        return (
+            User.objects
+            .filter(posts__is_published=True)
+            .select_related('profile')
+            .annotate(
+                posts_count=Count(
+                    'posts',
+                    filter=Q(posts__is_published=True),
+                    distinct=True
+                )
+            )
+            .filter(posts_count__gt=0)
+            .order_by(
+                '-profile__likes_count',
+                '-posts_count',
+                'username'
+            )
+        )
