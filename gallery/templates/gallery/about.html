@@ -9,7 +9,7 @@
 
 {% block content %}
 
-<!-- HERO СЕКЦИЯ -->
+<!-- HERO -->
 <section class="about-hero">
     <img src="{% static 'images/about-hero.jpg' %}" alt="PhotoBank" class="about-hero-image">
     <div class="about-hero-overlay"></div>
@@ -28,9 +28,15 @@
     <div class="text-center mb-5">
         <small class="text-primary fw-bold">НАША ИСТОРИЯ</small>
         <h2 class="mt-2">История PhotoBank</h2>
-        <p class="text-muted">Более двадцати лет мы развиваем платформу...</p>
+        <p class="text-muted">Более двадцати лет мы развиваем платформу, которая объединяет фотографов, дизайнеров, издателей и бизнес.</p>
     </div>
-    <!-- тут ваш текст истории -->
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <p>История PhotoBank началась в 2006 году, когда появилась идея создать современную площадку, позволяющую фотографам безопасно публиковать свои работы, а пользователям — легально приобретать профессиональный визуальный контент.</p>
+            <p>За годы развития платформа превратилась в полноценный международный фотобанк, где независимые авторы получают возможность демонстрировать своё портфолио, лицензировать фотографии и находить новых клиентов.</p>
+            <p>Сегодня PhotoBank продолжает развиваться, уделяя особое внимание качеству фотографий, защите авторских прав и прозрачности лицензирования.</p>
+        </div>
+    </div>
 </section>
 
 <!-- ПРЕИМУЩЕСТВА -->
@@ -38,20 +44,21 @@
     <div class="text-center mb-5">
         <small class="text-primary fw-bold">ПРЕИМУЩЕСТВА</small>
         <h2>Почему выбирают PhotoBank</h2>
+        <p class="text-muted">Мы создаем платформу, где фотографы могут зарабатывать на творчестве, а бизнес — легально использовать профессиональный контент.</p>
     </div>
     <div class="row g-4">
         <div class="col-md-6 col-lg-3">
             <div class="feature-card">
                 <div class="feature-icon"><i class="bi bi-camera"></i></div>
                 <h4>Для фотографов</h4>
-                <p>Публикуйте свои работы, развивайте портфолио и получайте доход.</p>
+                <p>Публикуйте свои работы, развивайте портфолио и получайте доход от лицензирования.</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3">
             <div class="feature-card">
                 <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
                 <h4>Защита авторов</h4>
-                <p>Особое внимание уделяется авторскому праву и лицензированию.</p>
+                <p>Особое внимание уделяется авторскому праву и безопасному использованию изображений.</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3">
@@ -65,7 +72,7 @@
             <div class="feature-card">
                 <div class="feature-icon"><i class="bi bi-award"></i></div>
                 <h4>Проверенное качество</h4>
-                <p>Мы публикуем только качественные изображения.</p>
+                <p>Мы публикуем только качественные изображения, готовые к коммерческому использованию.</p>
             </div>
         </div>
     </div>
@@ -76,41 +83,62 @@
     <div class="text-center mb-5">
         <small class="text-primary fw-bold">КОМУ ПОДХОДИТ PHOTOBANK</small>
         <h2>Мы создаем платформу для всех</h2>
+        <p class="text-muted">Независимо от того, создаете ли вы фотографии или используете их в работе — PhotoBank станет вашим помощником.</p>
     </div>
     <div class="row g-4">
         <div class="col-md-6 col-lg-4">
             <div class="audience-card">
                 <div class="audience-icon"><i class="bi bi-camera"></i></div>
                 <h4>Фотографам</h4>
-                <p>Загружайте работы и получайте доход от лицензирования.</p>
+                <p>Загружайте работы, создавайте портфолио и получайте доход от лицензирования.</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4">
             <div class="audience-card">
                 <div class="audience-icon"><i class="bi bi-palette"></i></div>
                 <h4>Дизайнерам</h4>
-                <p>Находите качественные изображения для проектов.</p>
+                <p>Находите качественные изображения для сайтов, рекламы и цифровых проектов.</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-4">
             <div class="audience-card">
                 <div class="audience-icon"><i class="bi bi-shop"></i></div>
                 <h4>Интернет-магазинам</h4>
-                <p>Используйте фото для карточек товаров и баннеров.</p>
+                <p>Используйте фото для карточек товаров, баннеров и рекламных кампаний.</p>
             </div>
         </div>
-        <!-- остальные audience-card по аналогии -->
+        <div class="col-md-6 col-lg-4">
+            <div class="audience-card">
+                <div class="audience-icon"><i class="bi bi-newspaper"></i></div>
+                <h4>СМИ</h4>
+                <p>Иллюстрируйте статьи и редакционные материалы легальным контентом.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="audience-card">
+                <div class="audience-icon"><i class="bi bi-megaphone"></i></div>
+                <h4>Маркетологам</h4>
+                <p>Создавайте рекламные кампании и брендовые материалы быстрее.</p>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="audience-card">
+                <div class="audience-icon"><i class="bi bi-building"></i></div>
+                <h4>Компаниям</h4>
+                <p>Подбирайте контент для сайтов, каталогов и корпоративных проектов.</p>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- CTA СЕКЦИЯ -->
+<!-- CTA -->
 <section class="cta-section container">
     <div class="cta-wrapper">
         <img src="{% static 'images/cta-bg.jpg' %}" alt="" class="cta-bg">
         <div class="cta-overlay">
             <div class="text-white" style="max-width:560px;">
                 <h2>Присоединяйтесь к PhotoBank уже сегодня</h2>
-                <p class="mt-3">Публикуйте фотографии, расширяйте аудиторию, продавайте лицензии.</p>
+                <p class="mt-3">Публикуйте фотографии, расширяйте аудиторию, продавайте лицензии и становитесь частью профессионального сообщества.</p>
                 <div class="d-flex gap-3 mt-4">
                     <a href="{% url 'gallery:dashboard' %}" class="btn btn-primary">Стать автором</a>
                     <a href="{% url 'gallery:post_list' %}" class="btn btn-outline-light">Смотреть фото</a>
@@ -125,34 +153,35 @@
     <div class="text-center mb-5">
         <small class="text-primary fw-bold">НАШИ ПРИНЦИПЫ</small>
         <h2>Ценности PhotoBank</h2>
+        <p class="text-muted">Мы убеждены, что современный фотобанк должен быть удобным, безопасным и выгодным для всех.</p>
     </div>
     <div class="row g-4">
         <div class="col-md-6 col-lg-3">
             <div class="principle-card">
                 <div class="principle-icon"><i class="bi bi-check2-circle"></i></div>
                 <h4>Законность</h4>
-                <p>Соблюдение авторских прав и лицензирование.</p>
+                <p>Особое внимание лицензированию и соблюдению авторских прав.</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3">
             <div class="principle-card">
                 <div class="principle-icon"><i class="bi bi-star"></i></div>
                 <h4>Качество</h4>
-                <p>Высокие технические и коммерческие требования.</p>
+                <p>Высокие технические и коммерческие требования к фотографиям.</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3">
             <div class="principle-card">
                 <div class="principle-icon"><i class="bi bi-people"></i></div>
                 <h4>Партнерство</h4>
-                <p>Авторы — наши долгосрочные партнеры.</p>
+                <p>Авторы — наши долгосрочные партнеры, мы помогаем развивать портфолио.</p>
             </div>
         </div>
         <div class="col-md-6 col-lg-3">
             <div class="principle-card">
                 <div class="principle-icon"><i class="bi bi-graph-up"></i></div>
                 <h4>Развитие</h4>
-                <p>Постоянное совершенствование платформы.</p>
+                <p>Постоянное совершенствование платформы и расширение каталога.</p>
             </div>
         </div>
     </div>
