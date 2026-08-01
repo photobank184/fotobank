@@ -5,62 +5,52 @@
 
 {% block content %}
 
-<section class="py-5 bg-white border-bottom">
+<section class="hero-about position-relative overflow-hidden">
 
-    <div class="container py-5">
+    <img src="{% static 'img/about-hero.png' %}"
+         class="hero-image"
+         alt="PhotoBank">
 
-        <div class="row align-items-center g-5">
+    <div class="hero-overlay"></div>
 
-            <div class="col-lg-6">
+    <div class="container">
 
-                <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">
-                    PHOTOBANK
-                </span>
+        <div class="hero-content">
 
-                <h1 class="display-4 fw-bold mb-4">
+            <span class="badge rounded-pill bg-primary px-3 py-2 mb-4">
+                Фотобанк
+            </span>
 
-                    Современный фотобанк
-                    для фотографов,
-                    дизайнеров и бизнеса
+            <h1 class="display-3 fw-bold mb-4 text-white">
+                Современный фотобанк<br>
+                для фотографов,<br>
+                дизайнеров и бизнеса
+            </h1>
 
-                </h1>
+            <p class="lead text-white-50 mb-5">
 
-                <p class="lead text-secondary mb-4">
+                Публикуйте фотографии, находите клиентов,
+                лицензируйте изображения и развивайте своё
+                портфолио на современной платформе для
+                авторов и покупателей.
 
-                    PhotoBank — это современная платформа для публикации,
-                    лицензирования и поиска профессиональных фотографий.
-                    Мы объединяем авторов и покупателей изображений,
-                    предоставляя безопасную среду для легального использования
-                    визуального контента.
+            </p>
 
-                </p>
+            <div class="d-flex flex-wrap gap-3">
 
-                <div class="d-flex flex-wrap gap-3">
+                <a href="{% url 'gallery:dashboard' %}"
+                   class="btn btn-primary btn-lg px-5">
 
-                    <a href="{% url 'gallery:dashboard' %}"
-                       class="btn btn-primary btn-lg px-4">
+                    Стать автором
 
-                        Стать автором
+                </a>
 
-                    </a>
+                <a href="{% url 'gallery:post_list' %}"
+                   class="btn btn-light btn-lg px-5">
 
-                    <a href="{% url 'gallery:post_list' %}"
-                       class="btn btn-outline-dark btn-lg px-4">
+                    Смотреть фотографии
 
-                        Смотреть фотографии
-
-                    </a>
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-6">
-
-                <img
-                    src="{% static '/img/about/hero.png' %}"
-                    class="img-fluid rounded-4 shadow-lg"
-                    alt="PhotoBank">
+                </a>
 
             </div>
 
