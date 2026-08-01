@@ -92,6 +92,7 @@ class AuthorPostsView(ListView):
     model = Post
     template_name = 'gallery/author_posts.html'
     context_object_name = 'posts'
+    paginate_by = 12
 
     def get_queryset(self):
         self.author = get_object_or_404(User, username=self.kwargs['username'])
