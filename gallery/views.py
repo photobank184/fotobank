@@ -56,7 +56,7 @@ class PostListView(ListView):
             '-profile__likes_count',
             '-posts_count',
             'username'
-        )[:10]
+        )[:9]
 
         published_posts_for_categories = Post.objects.filter(
             is_published=True
