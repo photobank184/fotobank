@@ -52,7 +52,11 @@ class PostListView(ListView):
             posts_count=Count('posts', filter=Q(posts__is_published=True))
         ).filter(
             posts_count__gt=0
-        ).order_by('-posts_count')[:6]
+        ).order_by(
+            '-profile__likes_count',
+            '-posts_count',
+            'username'
+        )[:10]
 
         published_posts_for_categories = Post.objects.filter(
             is_published=True
