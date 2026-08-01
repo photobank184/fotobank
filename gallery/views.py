@@ -279,3 +279,4 @@ class AuthorsListView(ListView):
         )
 class AboutView(TemplateView):
     template_name = "gallery/about.html"
+
