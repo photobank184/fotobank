@@ -277,5 +277,5 @@ class AuthorsListView(ListView):
                 'username'
             )
         )
-    class AboutView(TemplateView):
-        template_name = "gallery/about.html"
+class AboutView(TemplateView):
+    template_name = "gallery/about.html"
