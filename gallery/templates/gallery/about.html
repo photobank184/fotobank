@@ -1,0 +1,963 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}О PhotoBank{% endblock %}
+
+{% block content %}
+
+<section class="py-5 bg-white border-bottom">
+
+    <div class="container py-5">
+
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+
+                <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">
+                    PHOTOBANK
+                </span>
+
+                <h1 class="display-4 fw-bold mb-4">
+
+                    Современный фотобанк
+                    для фотографов,
+                    дизайнеров и бизнеса
+
+                </h1>
+
+                <p class="lead text-secondary mb-4">
+
+                    PhotoBank — это современная платформа для публикации,
+                    лицензирования и поиска профессиональных фотографий.
+                    Мы объединяем авторов и покупателей изображений,
+                    предоставляя безопасную среду для легального использования
+                    визуального контента.
+
+                </p>
+
+                <div class="d-flex flex-wrap gap-3">
+
+                    <a href="{% url 'gallery:dashboard' %}"
+                       class="btn btn-primary btn-lg px-4">
+
+                        Стать автором
+
+                    </a>
+
+                    <a href="{% url 'gallery:post_list' %}"
+                       class="btn btn-outline-dark btn-lg px-4">
+
+                        Смотреть фотографии
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <img
+                    src="{% static 'img/about-hero.jpg' %}"
+                    class="img-fluid rounded-4 shadow-lg"
+                    alt="PhotoBank">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-10">
+
+                <div class="text-center mb-5">
+
+                    <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">
+                        НАША ИСТОРИЯ
+                    </span>
+
+                    <h2 class="display-5 fw-bold">
+
+                        История PhotoBank
+
+                    </h2>
+
+                    <p class="lead text-secondary mt-3">
+
+                        Более двадцати лет мы развиваем платформу,
+                        которая объединяет фотографов,
+                        дизайнеров,
+                        издателей
+                        и бизнес.
+
+                    </p>
+
+                </div>
+
+                <div class="row g-5 align-items-center">
+
+                    <div class="col-lg-5">
+
+                        <img
+                            src="{% static 'img/about/history.jpg' %}"
+                            class="img-fluid rounded-4 shadow"
+                            alt="История PhotoBank">
+
+                    </div>
+
+                    <div class="col-lg-7">
+
+                        <div class="ps-lg-4 border-start border-4 border-primary">
+
+                            <p class="fs-5">
+
+                                История PhotoBank началась в <strong>2006 году</strong>,
+                                когда появилась идея создать современную площадку,
+                                позволяющую фотографам безопасно публиковать свои работы,
+                                а пользователям — легально приобретать профессиональный
+                                визуальный контент. С самого начала главной целью проекта
+                                было сделать лицензирование фотографий понятным,
+                                удобным и доступным для всех участников рынка.
+
+                            </p>
+
+                            <p class="mt-4">
+
+                                За годы развития платформа превратилась
+                                в полноценный международный фотобанк,
+                                где независимые авторы получают возможность
+                                демонстрировать своё портфолио,
+                                лицензировать фотографии
+                                и находить новых клиентов,
+                                а компании, дизайнеры,
+                                издательства и интернет-магазины —
+                                быстро подбирать качественный контент
+                                для коммерческих и творческих проектов.
+
+                            </p>
+
+                            <p class="mt-4 mb-0">
+
+                                Сегодня PhotoBank продолжает развиваться,
+                                уделяя особое внимание качеству фотографий,
+                                защите авторских прав,
+                                прозрачности лицензирования
+                                и созданию современной платформы,
+                                которая делает сотрудничество между авторами
+                                и покупателями максимально простым
+                                и безопасным.
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">
+                ПРЕИМУЩЕСТВА
+            </span>
+
+            <h2 class="display-5 fw-bold">
+
+                Почему выбирают PhotoBank
+
+            </h2>
+
+            <p class="lead text-secondary">
+
+                Мы создаем платформу, где фотографы могут зарабатывать
+                на своем творчестве, а бизнес — легально использовать
+                профессиональный визуальный контент.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card h-100">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-camera2"></i>
+
+                    </div>
+
+                    <h4>
+
+                        Для фотографов
+
+                    </h4>
+
+                    <p>
+
+                        Публикуйте свои работы,
+                        развивайте портфолио
+                        и получайте доход
+                        от лицензирования фотографий.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card h-100">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-shield-check"></i>
+
+                    </div>
+
+                    <h4>
+
+                        Защита авторов
+
+                    </h4>
+
+                    <p>
+
+                        Особое внимание уделяется
+                        авторскому праву,
+                        лицензированию
+                        и безопасному использованию изображений.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card h-100">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-search"></i>
+
+                    </div>
+
+                    <h4>
+
+                        Удобный поиск
+
+                    </h4>
+
+                    <p>
+
+                        Быстро находите фотографии
+                        благодаря категориям,
+                        ключевым словам
+                        и современному каталогу.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="feature-card h-100">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-stars"></i>
+
+                    </div>
+
+                    <h4>
+
+                        Проверенное качество
+
+                    </h4>
+
+                    <p>
+
+                        Мы стремимся публиковать
+                        только качественные изображения,
+                        готовые к коммерческому использованию.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">
+                ИСТОРИЯ РАЗВИТИЯ
+            </span>
+
+            <h2 class="display-5 fw-bold">
+
+                Наш путь
+
+            </h2>
+
+            <p class="lead text-secondary">
+
+                Более двадцати лет мы совершенствуем платформу,
+                делая лицензирование фотографий
+                удобным, безопасным и доступным.
+
+            </p>
+
+        </div>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+
+                <div class="timeline-year">
+
+                    2006
+
+                </div>
+
+                <div class="timeline-card">
+
+                    <h4>
+
+                        Рождение идеи
+
+                    </h4>
+
+                    <p>
+
+                        Появилась идея создать современную платформу
+                        для законного обмена профессиональными фотографиями.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-year">
+
+                    2007
+
+                </div>
+
+                <div class="timeline-card">
+
+                    <h4>
+
+                        Запуск PhotoBank
+
+                    </h4>
+
+                    <p>
+
+                        Платформа объединила фотографов
+                        и покупателей изображений
+                        в едином безопасном пространстве.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-year">
+
+                    2010
+
+                </div>
+
+                <div class="timeline-card">
+
+                    <h4>
+
+                        Поддержка авторов
+
+                    </h4>
+
+                    <p>
+
+                        Мы начали развивать партнерскую модель,
+                        помогая фотографам
+                        зарабатывать на лицензировании своих работ.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-year">
+
+                    2016
+
+                </div>
+
+                <div class="timeline-card">
+
+                    <h4>
+
+                        Коммерческий контент
+
+                    </h4>
+
+                    <p>
+
+                        Каталог начал активно пополняться
+                        изображениями
+                        для рекламы,
+                        бизнеса
+                        и интернет-проектов.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-year">
+
+                    2020
+
+                </div>
+
+                <div class="timeline-card">
+
+                    <h4>
+
+                        Развитие каталога
+
+                    </h4>
+
+                    <p>
+
+                        Особое внимание уделяется
+                        интернет-магазинам,
+                        маркетингу
+                        и современному коммерческому контенту.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-year">
+
+                    2024
+
+                </div>
+
+                <div class="timeline-card">
+
+                    <h4>
+
+                        Усиление защиты авторских прав
+
+                    </h4>
+
+                    <p>
+
+                        Мы совершенствуем лицензирование,
+                        повышаем безопасность
+                        и прозрачность использования изображений.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="timeline-item">
+
+                <div class="timeline-year">
+
+                    2025
+
+                </div>
+
+                <div class="timeline-card">
+
+                    <h4>
+
+                        PhotoBank сегодня
+
+                    </h4>
+
+                    <p>
+
+                        Мы продолжаем развивать платформу,
+                        расширять каталог
+                        и создавать лучшие условия
+                        для фотографов и покупателей.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">
+                КОМУ ПОДХОДИТ PHOTOBANK
+            </span>
+
+            <h2 class="display-5 fw-bold">
+
+                Мы создаем платформу
+                для всех, кто работает
+                с визуальным контентом
+
+            </h2>
+
+            <p class="lead text-secondary">
+
+                Независимо от того,
+                создаете ли вы фотографии
+                или ежедневно используете их в работе —
+                PhotoBank станет вашим надежным помощником.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="audience-card">
+
+                    <div class="audience-icon">
+
+                        <i class="bi bi-camera-fill"></i>
+
+                    </div>
+
+                    <h4>Фотографам</h4>
+
+                    <p>
+
+                        Загружайте свои работы,
+                        создавайте портфолио
+                        и получайте доход
+                        от лицензирования фотографий.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="audience-card">
+
+                    <div class="audience-icon">
+
+                        <i class="bi bi-palette-fill"></i>
+
+                    </div>
+
+                    <h4>Дизайнерам</h4>
+
+                    <p>
+
+                        Находите качественные изображения
+                        для сайтов,
+                        рекламы,
+                        полиграфии
+                        и цифровых проектов.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="audience-card">
+
+                    <div class="audience-icon">
+
+                        <i class="bi bi-shop"></i>
+
+                    </div>
+
+                    <h4>Интернет-магазинам</h4>
+
+                    <p>
+
+                        Используйте профессиональные фотографии
+                        для карточек товаров,
+                        баннеров
+                        и рекламных кампаний.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="audience-card">
+
+                    <div class="audience-icon">
+
+                        <i class="bi bi-newspaper"></i>
+
+                    </div>
+
+                    <h4>Средствам массовой информации</h4>
+
+                    <p>
+
+                        Иллюстрируйте статьи,
+                        публикации
+                        и редакционные материалы
+                        легальным контентом.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="audience-card">
+
+                    <div class="audience-icon">
+
+                        <i class="bi bi-megaphone-fill"></i>
+
+                    </div>
+
+                    <h4>Маркетологам</h4>
+
+                    <p>
+
+                        Создавайте рекламные кампании,
+                        презентации
+                        и брендовые материалы
+                        быстрее.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+
+                <div class="audience-card">
+
+                    <div class="audience-icon">
+
+                        <i class="bi bi-building"></i>
+
+                    </div>
+
+                    <h4>Компаниям</h4>
+
+                    <p>
+
+                        Подбирайте качественный
+                        визуальный контент
+                        для сайтов,
+                        каталогов
+                        и корпоративных проектов.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="cta-section my-5">
+
+    <div class="container">
+
+        <div class="cta-wrapper">
+
+            <img
+                src="{% static 'img/about/hero.png' %}"
+                alt="PhotoBank"
+                class="cta-bg">
+
+            <div class="cta-overlay">
+
+                <div class="row">
+
+                    <div class="col-lg-7">
+
+                        <span class="badge bg-light text-primary rounded-pill px-3 py-2 mb-4">
+
+                            PHOTOBANK
+
+                        </span>
+
+                        <h2 class="display-4 fw-bold text-white mb-4">
+
+                            Присоединяйтесь
+                            к PhotoBank
+                            уже сегодня
+
+                        </h2>
+
+                        <p class="lead text-white opacity-75 mb-5">
+
+                            Загружайте свои лучшие фотографии,
+                            расширяйте аудиторию,
+                            находите новых клиентов
+                            и зарабатывайте
+                            на лицензировании изображений.
+
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-3">
+
+                            <a href="{% url 'gallery:dashboard' %}"
+                               class="btn btn-primary btn-lg px-5">
+
+                                Стать автором
+
+                            </a>
+
+                            <a href="{% url 'gallery:post_list' %}"
+                               class="btn btn-light btn-lg px-5">
+
+                                Смотреть каталог
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="py-5 bg-white">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <span class="badge bg-primary rounded-pill px-3 py-2 mb-3">
+                НАШИ ПРИНЦИПЫ
+            </span>
+
+            <h2 class="display-5 fw-bold">
+
+                Ценности,
+                на которых строится PhotoBank
+
+            </h2>
+
+            <p class="lead text-secondary">
+
+                Мы убеждены,
+                что современный фотобанк должен быть
+                удобным,
+                безопасным
+                и выгодным
+                как для авторов,
+                так и для покупателей.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="principle-card">
+
+                    <div class="principle-icon">
+
+                        <i class="bi bi-shield-lock-fill"></i>
+
+                    </div>
+
+                    <h4>
+
+                        Законность
+
+                    </h4>
+
+                    <p>
+
+                        Мы уделяем особое внимание
+                        лицензированию изображений
+                        и соблюдению авторских прав.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="principle-card">
+
+                    <div class="principle-icon">
+
+                        <i class="bi bi-patch-check-fill"></i>
+
+                    </div>
+
+                    <h4>
+
+                        Качество
+
+                    </h4>
+
+                    <p>
+
+                        Мы стремимся публиковать
+                        фотографии,
+                        соответствующие высоким
+                        техническим
+                        и коммерческим требованиям.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="principle-card">
+
+                    <div class="principle-icon">
+
+                        <i class="bi bi-people-fill"></i>
+
+                    </div>
+
+                    <h4>
+
+                        Партнерство
+
+                    </h4>
+
+                    <p>
+
+                        Мы рассматриваем авторов
+                        как долгосрочных партнеров
+                        и помогаем развивать
+                        их профессиональное портфолио.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="principle-card">
+
+                    <div class="principle-icon">
+
+                        <i class="bi bi-globe2"></i>
+
+                    </div>
+
+                    <h4>
+
+                        Развитие
+
+                    </h4>
+
+                    <p>
+
+                        Мы постоянно совершенствуем
+                        платформу,
+                        расширяем каталог
+                        и внедряем новые возможности.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
