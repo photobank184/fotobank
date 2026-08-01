@@ -58,7 +58,7 @@
             <div class="col-lg-6">
 
                 <img
-                    src="{% static 'img/about-hero.jpg' %}"
+                    src="{% static 'img/hero.jpg' %}"
                     class="img-fluid rounded-4 shadow-lg"
                     alt="PhotoBank">
 
@@ -737,64 +737,66 @@
     </div>
 
 </section>
-<section class="cta-section my-5">
-
+<section class="py-5">
     <div class="container">
 
-        <div class="cta-wrapper">
+        <div class="rounded-5 overflow-hidden position-relative p-5 text-white"
+             style="
+                background:
+                linear-gradient(135deg,#0f172a 0%,#1d4ed8 55%,#3b82f6 100%);
+             ">
 
-            <img
-                src="{% static 'img/about/hero.png' %}"
-                alt="PhotoBank"
-                class="cta-bg">
+            <div class="row align-items-center">
 
-            <div class="cta-overlay">
+                <div class="col-lg-8">
 
-                <div class="row">
+                    <span class="badge rounded-pill bg-light text-primary px-3 py-2 mb-3">
+                        PhotoBank
+                    </span>
 
-                    <div class="col-lg-7">
+                    <h2 class="display-5 fw-bold mb-4">
+                        Присоединяйтесь к PhotoBank уже сегодня
+                    </h2>
 
-                        <span class="badge bg-light text-primary rounded-pill px-3 py-2 mb-4">
+                    <p class="lead text-white-50 mb-4">
+                        Публикуйте фотографии, расширяйте свою аудиторию,
+                        продавайте лицензии и становитесь частью
+                        профессионального сообщества фотографов,
+                        дизайнеров и покупателей изображений.
+                    </p>
 
-                            PHOTOBANK
+                    <div class="d-flex flex-wrap gap-3">
 
-                        </span>
+                        <a href="{% url 'gallery:dashboard' %}"
+                           class="btn btn-light btn-lg px-4">
+                            Стать автором
+                        </a>
 
-                        <h2 class="display-4 fw-bold text-white mb-4">
+                        <a href="{% url 'gallery:home' %}"
+                           class="btn btn-outline-light btn-lg px-4">
+                            Смотреть фотографии
+                        </a>
 
-                            Присоединяйтесь
-                            к PhotoBank
-                            уже сегодня
+                    </div>
 
-                        </h2>
+                </div>
 
-                        <p class="lead text-white opacity-75 mb-5">
+                <div class="col-lg-4 text-center d-none d-lg-block">
 
-                            Загружайте свои лучшие фотографии,
-                            расширяйте аудиторию,
-                            находите новых клиентов
-                            и зарабатывайте
-                            на лицензировании изображений.
+                    <div class="bg-white bg-opacity-10 rounded-5 p-4">
 
+                        <i class="bi bi-camera2"
+                           style="font-size:72px;"></i>
+
+                        <h5 class="mt-4 fw-bold">
+                            Более тысячи фотографий
+                        </h5>
+
+                        <p class="text-white-50 mb-0">
+                            Загружайте работы,
+                            находите клиентов
+                            и развивайте своё портфолио.
                         </p>
-
-                        <div class="d-flex flex-wrap gap-3">
-
-                            <a href="{% url 'gallery:dashboard' %}"
-                               class="btn btn-primary btn-lg px-5">
-
-                                Стать автором
-
-                            </a>
-
-                            <a href="{% url 'gallery:post_list' %}"
-                               class="btn btn-light btn-lg px-5">
-
-                                Смотреть каталог
-
-                            </a>
-
-                        </div>
 
                     </div>
 
@@ -805,7 +807,6 @@
         </div>
 
     </div>
-
 </section>
 <section class="py-5 bg-white">
 
