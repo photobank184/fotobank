@@ -6,191 +6,103 @@
 
 {% block content %}
 
-<main class="section-padding bg-light" style="padding-top: 140px;">
-  <div class="container">
-
-    <div class="text-center mb-5">
-      <div class="section-kicker mb-2">Автор</div>
-      <h1 class="section-title">{{ author.username }}</h1>
-
+Автор
+{{ author.username }}
       {% if author.profile.bio %}
-        <p class="text-secondary mt-3">
+        
           {{ author.profile.bio }}
-        </p>
+        
       {% endif %}
-    </div>
-
-    <div class="row g-4">
+    
 
    {% for post in posts %}
 
-<div class="col-md-6 col-lg-4 mb-4">
 
-    <article class="photo-card-new h-100">
 
         {% with post.photos.first as cover %}
             {% if cover %}
-                <a href="{% url 'gallery:post_detail' post.slug %}"
-                   class="photo-card-image-link">
-
-                    <img
-                        src="{{ cover.image.url }}"
-                        class="photo-card-new-img"
-                        alt="{{ cover.title|default:post.title }}">
-
-                </a>
+                
             {% endif %}
         {% endwith %}
 
-        <div class="photo-card-new-body">
-
-            <h3 class="photo-card-title">
+        
                 {{ post.title }}
-            </h3>
-
-            <p class="photo-card-author mb-3">
+            
                 {{ post.published_at|date:"d.m.Y" }}
-            </p>
-
-            <a href="{% url 'gallery:post_detail' post.slug %}"
-               class="btn btn-outline-dark rounded-pill px-4">
+            
+[
                 Открыть
-            </a>
-
-        </div>
-
-    </article>
-
-</div>
-
+            ]({% url 'gallery:post_detail' post.slug %})
 {% empty %}
-
-<div class="col-12">
-
-    <div class="empty-state text-center">
-
-        <h3>У автора пока нет опубликованных работ</h3>
-
-    </div>
-
-</div>
-
+У автора пока нет опубликованных работ
 {% endfor %}
 
 
 {% if is_paginated %}
+    
+        
+                
+                    {% if page_obj.has_previous %}
 
-<div class="row mt-5">
+                        
+[
 
-    <div class="col-12">
+                                <i class="bi bi-chevron-left"></i>
 
-        <nav aria-label="Навигация по страницам">
+                            ](?page={{ page_obj.previous_page_number }})
+                    {% else %}
 
-            <ul class="pagination justify-content-center">
-
-                {% if page_obj.has_previous %}
-
-                    <li class="page-item">
-
-                        <a class="page-link"
-                           href="?page={{ page_obj.previous_page_number }}">
-
-                            ←
-
-                        </a>
-
-                    </li>
-
-                {% else %}
-
-                    <li class="page-item disabled">
-
-                        <span class="page-link">←</span>
-
-                    </li>
-
-                {% endif %}
-
-
-                {% for num in paginator.page_range %}
-
-                    {% if page_obj.number == num %}
-
-                        <li class="page-item active">
-
-                            <span class="page-link">
-
-                                {{ num }}
-
-                            </span>
-
-                        </li>
-
-                    {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
-
-                        <li class="page-item">
-
-                            <a class="page-link"
-                               href="?page={{ num }}">
-
-                                {{ num }}
-
-                            </a>
-
-                        </li>
-
+                        
+<i class="bi bi-chevron-left"></i>
                     {% endif %}
 
-                {% endfor %}
+
+                    {% for num in paginator.page_range %}
+
+                        {% if page_obj.number == num %}
+
+                            
+                                {{ num }}
+
+                            
+                        {% elif num > page_obj.number|add:"-3" and num < page_obj.number|add:"3" %}
+
+                            
+[
+
+                                {{ num }}
+
+                            ](?page={{ num }})
+                        {% endif %}
+
+                    {% endfor %}
 
 
-                {% if page_obj.has_next %}
+                    {% if page_obj.has_next %}
 
-                    <li class="page-item">
+                        
+[
 
-                        <a class="page-link"
-                           href="?page={{ page_obj.next_page_number }}">
+                                <i class="bi bi-chevron-right"></i>
 
-                            →
+                            ](?page={{ page_obj.next_page_number }})
+                    {% else %}
 
-                        </a>
+                        
+<i class="bi bi-chevron-right"></i>
+                    {% endif %}
 
-                    </li>
+                
+            
 
-                {% else %}
-
-                    <li class="page-item disabled">
-
-                        <span class="page-link">→</span>
-
-                    </li>
-
-                {% endif %}
-
-            </ul>
-
-        </nav>
-
-        <p class="text-center text-muted mt-3">
-
-            Показано
-            <strong>{{ page_obj.start_index }}</strong>
-            –
-            <strong>{{ page_obj.end_index }}</strong>
-            из
-            <strong>{{ paginator.count }}</strong>
-            фотографий
-
-        </p>
-
-    </div>
-
-</div>
-
+            
+                {{ paginator.count }} фотографий
+                · показано {{ page_obj.start_index }}–{{ page_obj.end_index }}
+            
+        
+    
 {% endif %}
 
-    </div>
-  </div>
-</main>
+    
 
 {% endblock %}
